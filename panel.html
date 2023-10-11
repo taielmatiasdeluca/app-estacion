@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Panel | AppEstacion</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<content>
+		<h1>Estaciones Metereologicas</h1>
+		<div id="estaciones_list">
+			
+		</div>
+	</content>
+
+	<template id="estacion__tpl">
+		<a href="detalle.php?chipid={ID}" class="estacion">
+			<div class="apodo"></div>
+			<div class="ubicacion_container">
+				<span class="material-symbols-outlined">location_on</span>
+				<div class="ubicacion">
+				</div>
+			</div>
+			<div class="visitas_container">
+				<span class="material-symbols-outlined">person</span>
+				<div class="visitas">
+				</div>
+			</div>
+			
+		</a>
+		
+	</template>
+	<script src="script.js"></script>
+</body>
+</html>
