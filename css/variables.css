@@ -1,0 +1,9 @@
+
+:root{
+	--bg-color:#264653;	
+}
+
+@font-face{
+	font-family: title;
+	src: url("http://robertoarlt.ddns.net:8080/resources/font/Poppins-Regular.ttf");
+}

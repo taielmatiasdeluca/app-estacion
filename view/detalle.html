@@ -1,12 +1,4 @@
-<?php 
-	
-	if(!isset($_GET['chipid'])){
-		header('Location: panel.html');
-	}
-	$chip = $_GET['chipid'];
 
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Detalles | AppEstacion</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	<link rel="stylesheet" href="detalle.css">
+	<link rel="stylesheet" href="{{URL_APP}}/css/detalle.css">
 </head>
 <body>
 	
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-	<input type="hidden" name="" id="chipid__hidden" value="<?= $chip ?>">
+	<input type="hidden" name="" id="chipid__hidden" value="{{CHIP}}">
 	
 	<content>
 		<main>
@@ -62,6 +54,6 @@
 		
 	</content>
 
-	<script src="detalle.js"></script>
+	<script src="{{URL_APP}}/js/detalle.js"></script>
 </body>
 </html>

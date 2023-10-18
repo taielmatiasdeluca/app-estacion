@@ -9,7 +9,7 @@ async function getEstaciones(){
 getEstaciones().then(data=>{
 	data.map(estacion=>{
 		let clon = estacion__tpl.content.cloneNode(true);
-		clon.querySelector('.estacion').href = clon.querySelector('.estacion').href.replace('{ID}',estacion.chipid);
+		clon.querySelector('.estacion').href = clon.querySelector('.estacion').href.replace('ID',estacion.chipid);
 		clon.querySelector('.apodo').textContent = estacion.apodo.toUpperCase();
 		clon.querySelector('.ubicacion').textContent = estacion.ubicacion;
 		clon.querySelector('.visitas').textContent = estacion.visitas;

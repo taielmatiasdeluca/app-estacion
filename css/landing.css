@@ -1,0 +1,41 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body,html{
+	width: 100%;
+	min-height: 100%;
+}
+
+body{
+	background: var(--bg-color);
+}
+
+content{
+	width: 100%;
+	font-family: title;
+}
+
+#app__list{
+	width: 100%;
+	min-height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.app{
+	display: flex;
+	width:250px;
+	height:250px;
+	color:white;
+	text-decoration: none;
+	font-size: 45px;
+	align-items: center;
+	justify-content: center	;
+	text-align: center;
+}
