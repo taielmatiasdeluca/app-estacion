@@ -9,6 +9,12 @@
 	require 'lib/TplEngine.php';
 
 
+	require 'lib/EmailEngine.php';
+
+	include 'vendor/Mailer/src/PHPMailer.php';
+	include 'vendor/Mailer/src/SMTP.php';
+	include 'vendor/Mailer/src/Exception.php';
+
 
 
 	
@@ -20,50 +26,16 @@
 	$method = $_SERVER['REQUEST_METHOD']; //Metodo con el que se quizo ingresar
 
 	if(isset($url[0])){
-		//Ingreso a alguna api
-
-		if($url[0] == 'api'){
-			//Levanta funciones de las api
-			require 'config/apiTools.php';
-			//Transforma la respuesta a un json
-			header("Content-Type: application/json");
-
-			//Modelo
-			if(isset($url[1])){
-				$model_requested = ucfirst($url[1]);
-				$url_model = "model/{$model_requested}Model.php";
-				if(file_exists($url_model)){
-					//Incluye el controlador
-					require $url_model;
-					$modelo = new $model_requested;
-					if(isset($url[2])){
-						$method_requested = $url[2];
-						if(method_exists($modelo,$method_requested)){
-							$response = $modelo->$method_requested();
-							echo json_encode($response);
-							die();
-						}
-						else{
-							error('No existe esa funcionalidad');
-						}
-					}
-				}else{
-					error('No se encontro esa api');
-				}
-			}else{
-				error('No se ingreso ninguna api');
-			}
+	
+		if(file_exists('controller/'.$url[0].'Controller.php')){
+			//Incluye el controlador
+			include 'controller/'.$url[0].'Controller.php';
 		}
 		else{
-			if(file_exists('controller/'.$url[0].'Controller.php')){
-				//Incluye el controlador
-				include 'controller/'.$url[0].'Controller.php';
-			}
-			else{
-				//No se encontro
-				include 'controller/404Controller.php';
-			}
+			//No se encontro
+			include 'controller/404Controller.php';
 		}
+		
 	}else{
 		//Se carga la landing
 		include 'controller/panelController.php';

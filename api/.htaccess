@@ -1,0 +1,9 @@
+
+RewriteEngine On
+RewriteRule ^ api.php
+
+# Protect the htaccess file
+<Files sftp.json>
+Order Allow,Deny
+Deny from all
+</Files>

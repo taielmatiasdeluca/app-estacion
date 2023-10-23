@@ -1,6 +1,5 @@
 <?php
 
-	require 'ddbb/credentials.php';
 	class Database{
 		public static $instance;
 		public $conexion;
@@ -19,7 +18,7 @@
 		}
 
 		public function makeConnection(){
-			$this->conexion = new mysqli(URL_DB,USERNAME,PASSWORD,DATABASE);
+			$this->conexion = new mysqli(URL_DB,USERNAME_DB,PASSWORD_DB,DATABASE);
 		}
 	}
 

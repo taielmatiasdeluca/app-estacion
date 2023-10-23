@@ -6,6 +6,11 @@ async function getEstaciones(){
 	return data;
 }
 
+cerrar__sesion.addEventListener('click',async e=>{
+	await fetch('https://mattprofe.com.ar/alumno/3890/app-estacion/api/user/logout');
+	window.location.href = "https://mattprofe.com.ar/alumno/3890/app-estacion/";
+})
+
 getEstaciones().then(data=>{
 	data.map(estacion=>{
 		let clon = estacion__tpl.content.cloneNode(true);
