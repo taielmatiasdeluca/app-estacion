@@ -3,16 +3,17 @@
 		public $conexion;
 		function __construct()
 		{
-			$mail = new PHPMailer\PHPMailer\PHPMailer();
-			$mail->isSMTP();
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
+		$mail->isSMTP();
+
 	        $mail->SMTPDebug = 0 ;
-	        $mail->Host = HOST_M;
-	        $mail->Port = PORT_M;
-	        $mail->SMTPAuth = SMTP_AUTH; 
-	        $mail->SMTPSecure = SMTP_SECURE;
-	        $mail->Username = REMITENTE;
-	        $mail->Password = PASSWORD_M;
-	        $mail->setFrom(REMITENTE, NOMBRE_M);
+	        $mail->Host = 'smtp.gmail.com';
+	        $mail->Port = '587';
+	        $mail->SMTPAuth = true; 
+	        $mail->SMTPSecure = 'tls';
+	        $mail->Username = '';
+	        $mail->Password = '';
+	        $mail->setFrom('', '');
 	        $this->conexion = $mail;
 		}
 

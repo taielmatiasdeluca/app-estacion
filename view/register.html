@@ -5,32 +5,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Panel | AppEstacion</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	<link rel="stylesheet" href="{{URL_APP}}/css/styles.css">
+	@component: DEFAULT_LINK ~}
 </head>
 <body>
-	<content>
-		<h1>Registrarse en App Estacion</h1>
-		<h2 style="color:green;" id="notify__value"></h2>
-		<form action="" id="main__form">
-			<label for="">
-				Email
-				<input type="email" id="email__input" name="email">
-			</label>
-			<label for="">
-				Contraseña
-				<input type="password" id="password__input" name="password">
-			</label>
-			<label for="">
-				Repetir Contraseña
-				<input type="password" id="repeat__input" name="repeat_password">
-			</label>
-			<input type="submit" value="Iniciar Secion" id="main__button">
-		</form>
-		<a href="{{URL_APP}}/login">¿Ya tenes una cuenta? Ingresa</a>
 
 		
 
+	<content class="">
+		<form id="main__form" class="mb-3 container-sm  p-5">
+			<h1>Registrarse en App Estacion</h1>
+			<h2 style="color:green;" id="notify__value"></h2>
+		    <div class="mb-3">
+		    	<label class="form-label">Email</label>
+		    	<input type="email"  id="email__input"  class="form-control" name="email">
+		    </div>
+		  	<div class="mb-3">
+		    	<label for="exampleInputPassword1" class="form-label">Password</label>
+		    	<input  type="password" name="password"  id="password__input" class="form-control" >
+		  	</div>
+		  	<div class="mb-3">
+		    	<label for="exampleInputPassword1" class="form-label">Repeat Password</label>
+		    	<input  type="password" name="repeat_password"  id="repeat__input" class="form-control" >
+		  	</div>
+			<button type="submit" id="main__button" class="container-fluid btn btn-primary mb-3">Registrarse</button>
+			<div class="d-flex flex-column gap-3">
+				<a href="{{URL_APP}}/login">¿Ya tenes una cuenta? Ingresa</a>
+			</div>
+		  	
+		</form>
 	</content>
+		
 	<script src="{{URL_APP}}/js/register.js"></script>
 
 </body>

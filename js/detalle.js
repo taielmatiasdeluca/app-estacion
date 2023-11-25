@@ -4,29 +4,52 @@ const cantidad_info = 7;
 // variable que se usará para instanciar el gráfico
 let grafico = null
 let selected = 'Temperatura';
-  Chart.defaults.borderColor = '#FFFFFF';
-	Chart.defaults.color = '#FFFFFF';
+  Chart.defaults.borderColor = '#000000';
+	Chart.defaults.color = '#000000';
 
 let global_data;
 
+function removeAllLink(){
+	temp__value.closest('button').classList.remove('active');
+	humedad__value.closest('button').classList.remove('active');
+	compresion__value.closest('button').classList.remove('active');
+	wind__value.closest('button').classList.remove('active');
+	fire__value.closest('button').classList.remove('active');
+}
+
+
 temp__value.closest('button').addEventListener('click',e=>{
+		removeAllLink();
 	selected = 'Temperatura';
+	temp__value.closest('button').classList.add('active');
 	reloadData();
 });
 humedad__value.closest('button').addEventListener('click',e=>{
 	selected = 'Humedad';
+	removeAllLink();
+	humedad__value.closest('button').classList.add('active');
+
 	reloadData();
 });
 compresion__value.closest('button').addEventListener('click',e=>{
 	selected = 'Presion';
+	removeAllLink();
+	compresion__value.closest('button').classList.add('active');
+
 	reloadData();
 });
 wind__value.closest('button').addEventListener('click',e=>{
 	selected = 'Viento';
+	removeAllLink();
+	wind__value.closest('button').classList.add('active');
+
 	reloadData();
 });
 fire__value.closest('button').addEventListener('click',e=>{
 	selected = 'Fuego';
+	removeAllLink();
+	fire__value.closest('button').classList.add('active');
+
 	reloadData();
 });
 

@@ -38,7 +38,7 @@
 		
 	}else{
 		//Se carga la landing
-		include 'controller/panelController.php';
+		include 'controller/landingController.php';
 	}
 	
 ?>

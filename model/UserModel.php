@@ -23,6 +23,84 @@
             return false;
         }
 
+        function getClients(){
+            $query = $this->conexion->query("SELECT count(id) FROM `appestacion__ips`");
+            return $query->fetch_all()[0][0];
+        }
+
+        function getUsers(){
+            $query = $this->conexion->query("SELECT count(id) FROM `appestacion__usuarios`");
+            return $query->fetch_all()[0][0];
+        }
+
+        function location($parameters){
+            $query = $this->conexion->query("SELECT `ip`,`latitud`,`latitud`,`longitud`,`accesos` FROM `appestacion__ips`");
+
+            return $query->fetch_all(MYSQLI_ASSOC);
+        }
+
+        function getData($parameters){
+            $token = bin2hex(openssl_random_pseudo_bytes(16));
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $info = json_decode(file_get_contents("http://ipwho.is/$ip"));
+            $latitud = $info->latitude;
+            $longitud = $info->longitude;
+            $pais = $info->country;
+            $navegador = explode(' ',$_SERVER['HTTP_USER_AGENT'])[0];
+            $sistema  = explode(')',explode('(',$_SERVER['HTTP_USER_AGENT'])[1])[0];
+
+            //Verifica si existe la ip en la base de datos
+            $query = $this->conexion->query("SELECT id FROM `appestacion__ips` WHERE `ip`='$ip'");
+            if($query->num_rows >= 1){
+                $id_ip = $query->fetch_all()[0][0];
+                $this->conexion->query("UPDATE `appestacion__ips` SET `accesos` = `accesos` +1  WHERE `id`=$id_ip");
+            }
+            else{
+                $query = $this->conexion->query("INSERT INTO `appestacion__ips`(`ip`, `accesos`,latitud,longitud) VALUES ('$ip',1,'$latitud','$longitud')");
+                $id_ip = $this->conexion->insert_id;
+            }
+
+            //Verifica si existe el navegador en la base de datos
+            $query = $this->conexion->query("SELECT id FROM `appestacion__navegadores` WHERE navegador='$navegador'");
+            if($query->num_rows >= 1){
+
+                $id_navegador = $query->fetch_all()[0][0];
+            }
+            else{
+                $this->conexion->query("INSERT INTO `appestacion__navegadores` (`id`, `navegador`) VALUES (NULL, '$navegador')");
+                $id_navegador = $this->conexion->insert_id;
+            }
+
+            //Verifica si existe el pais en la base de datos
+            $query = $this->conexion->query("SELECT `id` FROM `appestacion__paises` WHERE pais='$pais'");
+            if($query->num_rows >= 1){
+                $id_pais = $query->fetch_all()[0][0];
+            }
+            else{
+                $this->conexion->query("INSERT INTO `appestacion__paises` (`id`, `pais`) VALUES (NULL, '$pais')")->insert_id;
+                $id_pais =$this->conexion->insert_id;
+
+            }
+
+            //Verifica si existe el sistema en la base de datos
+            $query = $this->conexion->query("SELECT `id` FROM `appestacion__sistemas` WHERE sistema='$sistema'");
+            if($query->num_rows >= 1){
+                $id_sistema = $query->fetch_all()[0][0];
+            }
+            else{
+
+                $this->conexion->query("INSERT INTO `appestacion__sistemas` (`id`, `sistema`) VALUES (NULL, '$sistema') ")->insert_id;
+                $id_sistema =$this->conexion->insert_id;
+                
+            }
+            $sql = "INSERT INTO `appestacion__tracker` (`token`, `idIp`, `idPais`, `idNavegador`, `idSistema`) VALUES ('$token', '$id_ip','$id_pais', '$id_navegador','$id_sistema');";
+            $this->conexion->query($sql);
+            if(!$this->conexion->error){
+                return 'exito';
+            }
+            return 'error';    
+        }
+
         function register($parameters){
 
             if(!isset($parameters['email']) || !isset($parameters['password']) ){
@@ -198,7 +276,7 @@
                         $sistema  = explode(')',explode('(',$_SERVER['HTTP_USER_AGENT'])[1])[0];
                         $this->token = $token;
                         $emailEngine = new EmailEngine();
-                        $emailEngine->send($this->email,'Ingresaron a Drive App ¿Fuiste Vos ?',"
+                        $emailEngine->send($this->email,'Ingresaron a App Estacion ¿Fuiste Vos ?',"
                             Datos del ingresante:
                             Navegador: $navegador
                             Ip: $ip

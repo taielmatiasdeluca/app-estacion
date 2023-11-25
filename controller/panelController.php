@@ -1,10 +1,10 @@
 <?php
-    if(!isset($_SESSION[SESSION_NAME])){
-        header("Location: ".URL."/login");
-        
-    }
 
     $tpl = new TplEngine('view/panel.html');
+
+    require 'model/UserModel.php';
+    $user = new User();
+    $user->getData([]);
 
     $tpl->print();
 ?>

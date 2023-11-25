@@ -27,7 +27,6 @@
 	//Levanta funciones de las api
 	require '../config/apiTools.php';
 
-
 	//Modelo
 	if(isset($url[0])){
 		$model_requested = ucfirst($url[0]);
@@ -38,6 +37,9 @@
 			$modelo = new $model_requested;
 			if(isset($url[1])){
 				$method_requested = $url[1];
+				if($method_requested == 'list-clients-location'){
+					$method_requested = 'location';
+				}
 				if(method_exists($modelo,$method_requested)){
 					switch ($method) {
 						case 'GET': // obtener
